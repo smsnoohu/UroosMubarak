@@ -1,0 +1,13 @@
+header{
+    background-color:#49a023;
+    text-align:center;
+    padding:10px;
+    img{
+        height:40px;
+        vertical-align:middle;
+        &:last-child{
+            height:30px;
+            padding-left:12px;
+        }
+    }
+}

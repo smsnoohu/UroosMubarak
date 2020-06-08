@@ -1,0 +1,53 @@
+.form-container{
+    padding:15px;
+    clear:both;
+    .row{
+        align-items:baseline;
+    }
+}
+.label{
+    @include label();
+    &-inline{
+        @include label();
+        display:inline-block;
+        vertical-align:1px;
+        padding-right:10px;
+    }
+}
+.required{
+    .label{
+        &:after{
+            content:'\2605';
+            color:#f00;
+            margin-left:5px;
+            font-size:70%;
+            vertical-align:5px;
+        }
+    }
+}
+.form-control{
+    @include form-control();
+    &-inline{
+        @include form-control();
+        margin:0 10px;
+        width:auto;
+    }
+    &-xs{
+        @include form-control();
+        max-width:70px;
+    }
+    @at-root{
+        select#{&}{
+            @include select();
+            &-inline{
+                @include select();
+                display:inline-block;
+                margin:0 10px;
+                width:auto;
+            }
+        }
+        textarea#{&}{
+            height:70px;
+        }
+    }
+}

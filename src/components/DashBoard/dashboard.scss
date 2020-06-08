@@ -1,0 +1,31 @@
+@import '../../assets/stylesheets/mixins/mixins';
+.dash-container{
+    padding:15px 15px 125px;
+    .today-event{
+        background:#032b4e url('../../assets/images/today-event-bg.jpg') no-repeat;
+        background-size:cover;
+        border-radius:10px;
+        border:solid 1px #d2d2d2;
+        @include box-shadow(5px, 0, 5px, rgba(0, 0, 0, .1));
+        padding:15px;
+        color:#fff;
+        a{
+            color:#fff;
+            text-decoration:underline;
+            font-weight:600;
+            &.more-event{
+                text-align:right;
+            }
+        }
+    }
+    .dua-container{
+        border-radius:10px;
+        border:solid 1px #d2d2d2;
+        @include box-shadow(5px, 0, 5px, rgba(0, 0, 0, .1));
+        padding:15px;
+        font-size:25px;
+        line-height:2;
+        direction: rtl;
+        text-align: right;
+    }
+}

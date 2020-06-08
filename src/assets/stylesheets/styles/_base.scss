@@ -1,0 +1,118 @@
+*{
+    margin:0;
+    padding:0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html{
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body{
+    font: normal 12px/18px 'poppinsregular', 'Trebuchet MS', Arial, San-serif;
+    color:#333;
+    background-color:#edf0ef;
+    font-weight:400;
+    line-height:1.5;
+    text-align:left;
+    background-color:#fff;
+}
+.pull-left{
+    float:left !important;
+}
+.pull-right{
+    float:right !important;
+}
+.text-left{
+    text-align:left !important;
+}
+.text-right{
+    text-align:right !important;
+}
+.text-center{
+    text-align:center !important;
+}
+.full-width{
+    width:100%;
+}
+.error-text{
+    color:#f00;
+}
+.clearfix{
+    @include clearFix();
+}
+hr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin:20px 0;
+    &.white{
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+    }
+}
+a{
+    // color:$link-color;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family:'philosopherregular';
+    font-weight:100;
+}
+.page-loader{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    background-color:rgba(255, 255, 255, 0.7);
+    z-index:10000;
+    &:after {
+        content: " ";
+        display: block;
+        width: 50px;
+        height: 50px;
+        position:fixed;
+        top:50%;
+        left:50%;
+        margin:-25px 0 0 -25px;
+        border-radius: 50%;
+        border: 6px solid #333;
+        border-color: #000 transparent #000 transparent;
+        animation: spinner 1.2s linear infinite;
+    }
+}
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#preload{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background-color:#fff;
+    color:#fff;
+    text-align:center;
+    .preload{
+        position:fixed;
+        left:50%;
+        top:50%;
+        margin:-141px 0 0 -148px;
+        img{
+            width:65%;
+            padding-top:15px;
+        }
+    }
+}

@@ -1,0 +1,56 @@
+@import '../../../assets/stylesheets/mixins/general';
+footer{
+    background-color:#f1f0f0;
+    position:fixed;
+    right:0;
+    bottom:0;
+    left:0;
+    ul{
+        list-style:none;
+        @include flex();
+        li{
+            flex:1;
+            text-align:center;
+            padding:10px 0;
+            a{
+                color:#333;
+                text-decoration:none;
+                text-transform:uppercase;
+                padding:10px;
+                display:inline-block;
+                em{
+                    font-size:30px;
+                    transition:margin-top .3s ease-out;
+                }
+                span{
+                    display:block;
+                    padding-top:5px;
+                    transition:color .3s ease-out;
+                }
+                &.active{
+                    position:relative;
+                    cursor:default;
+                    em{
+                        font-size:22px;
+                        background-color:#49a023;
+                        color:#fff;
+                        border-radius:10px;
+                        position:absolute;
+                        margin:-35px 0 0 -25px;
+                        left:50%;
+                        width:50px;
+                        text-align:center;
+                        padding:12px 0;
+                        @include box-shadow(3px, 0, 5px, rgba(0, 0, 0, 0.2));
+                    }
+                    span{
+                        color:#49a023;
+                        padding-top:20px;
+                        font-weight:600;
+                    }
+
+                }
+            }
+        }
+    }
+}

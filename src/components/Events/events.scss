@@ -1,0 +1,57 @@
+@import '../../assets/stylesheets/mixins/mixins';
+.events-wrapper{
+    position:relative;
+    padding:0 15px;
+    &:before{
+        position:absolute;
+        content:'';
+        width:100%;
+        height:40px;
+        background-color:#49a023;
+        z-index:-1;
+        left:0;
+    }
+    .display-date{
+        clear:both;
+        padding:15px 0;
+        font-weight:bold;
+        font-size:16px;
+        text-align:center;
+    }
+    .date-nav{
+        background-color:#fff;
+        border:solid 1px #e2e2e2;
+        border-radius:10px;
+        padding:15px;
+        text-align:center;
+        @include box-shadow(3px, 3px, 5px, rgba(126, 126, 126, 0.3));
+        button{
+            float:left;
+            &:last-of-type{
+                float:right;
+            }
+        }
+    }
+    .event-list{
+        list-style:none;
+        font-size:13px;
+        li{
+            position:relative;
+            padding-bottom:10px;
+            &:last-of-type{
+                padding-bottom:0;
+            }
+            > strong{
+                position:absolute;
+            }
+            > span{
+                display:block;
+                padding-left:120px;
+            }
+            h5{
+                font:bold 13px/18px 'poppinsregular', 'Trebuchet MS', Arial, San-serif;
+                padding-bottom:5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+.fa{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    font-family: 'FontAwesome';
+    font-weight: 400;
+}
+.fa-home:before{
+    content:'\f015';
+}
+.fa-calendar:before{
+    content:'\f073';
+}
+.fa-hand:before{
+    content:'\f4bd';
+}
+.fa-more:before{
+    content:'\f141';
+}
+.fa-chevron-left:before {
+    content: "\f053";
+}
+.fa-chevron-right:before {
+    content: "\f054";
+}
