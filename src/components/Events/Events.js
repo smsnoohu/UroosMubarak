@@ -113,24 +113,30 @@ const AccordionContent = ({ data }) => {
                         <span>{data.birthDate}</span>
                     </li>
                 )}
-                <li>
-                    <strong>Birth Place</strong>
-                    <span>{data.birthPlace}</span>
-                </li>
+                {data.birthPlace !== '' &&(
+                    <li>
+                        <strong>Birth Place</strong>
+                        <span>{data.birthPlace}</span>
+                    </li>
+                )}
                 {data.wisaalDate !== '' &&(
                     <li>
                         <strong>Wisaal Day</strong>
                         <span>{data.wisaalDate}</span>
                     </li>
                 )}
-                <li>
-                    <strong>Ziyarath Place</strong>
-                    <span>{data.ziyarathPlace}</span>
-                </li>
-                <li>
-                    <h5>Description</h5>
-                    <p>{data.additionalInfo}</p>
-                </li>
+                {data.ziyarathPlace !== '' &&(
+                    <li>
+                        <strong>Ziyarath Place</strong>
+                        <span>{data.ziyarathPlace}</span>
+                    </li>
+                )}
+                {data.additionalInfo !== '' &&(
+                    <li>
+                        <h5>Description</h5>
+                        <p>{data.additionalInfo}</p>
+                    </li>
+                )}
             </ul>
         </>
     )
