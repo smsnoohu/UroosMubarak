@@ -19,19 +19,21 @@ const DashBoard = () => {
     const [hijiriDay] = useState(getHijiriDay(today));
     const [hijiriMonth] = useState(getHijiriMonth(today));
 
-    const fetchEvent = () => {
+    const fetchEvent = async () => {
         setLoader(true);
-        fetch('https://quthbiyamanzil.org/new/mpro.php?customvar='+ hijiriMonth + '&table1=ThisDay')
-            .then(response => response.json())
-            .then((result) => {
-                setLoader(false);
-                let event = result.aaData.filter((event, index) => parseInt(event.Day) === hijiriDay).filter((event, index) => index < 3);
-                setEventData(event);
-            },
-            (error) => {
+        try{
+            const eventData = await fetch('https://quthbiyamanzil.org/new/mproForApp.php?customvar='+ hijiriMonth + '&table1=UroosMubarak')
+            let event = await eventData.json()
+            event = event.data.filter((event, index) => parseInt(event.day) === hijiriDay).filter((event, index) => index < 3);
+            setEventData(event);
+            setLoader(false);
+        } catch(e) {
+            if(e){
+                console.log(e.message, 'Try updating the API');
                 setLoader(false);
                 setError(error);
-            })
+            }
+        }
     }
 
     useEffect(() => {
@@ -50,13 +52,13 @@ const DashBoard = () => {
                                 <>
                                     {eventData.map((event, index) => {
                                         return(
-                                            <Fragment key={event.Day + index}>
-                                                <h1>{event.Details}</h1>
-                                                {event.Remarks.substr().length > 175 &&
-                                                    <p>{event.Remarks.slice(0, 150)}... <Link to="/Events">more</Link></p>
+                                            <Fragment key={event.id}>
+                                                <h1>{event.title}</h1>
+                                                {event.additionalInfo.substr().length > 175 &&
+                                                    <p>{event.additionalInfo.slice(0, 150)}... <Link to="/Events">more</Link></p>
                                                 }
-                                                {event.Remarks.substr().length < 175 &&
-                                                    <p>{event.Remarks}</p>
+                                                {event.additionalInfo.substr().length < 175 &&
+                                                    <p>{event.additionalInfo}</p>
                                                 }
                                                 {index !== eventData.length-1 && <hr className="white" /> }
                                             </Fragment>

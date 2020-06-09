@@ -43,19 +43,21 @@ const Events = () => {
         updateDate(nextDay);
     }
 
-    const fetchEvent = () => {
+    const fetchEvent = async () => {
         setLoader(true);
-        fetch('https://quthbiyamanzil.org/new/mpro.php?customvar='+ hijiriMonth + '&table1=ThisDay')
-            .then(response => response.json())
-            .then((result) => {
-                setLoader(false);
-                let event = result.aaData;
-                setEventData(event);
-            },
-            (error) => {
+        try{
+            const eventData = await fetch('https://quthbiyamanzil.org/new/mproForApp.php?customvar='+ hijiriMonth + '&table1=UroosMubarak')
+            let event = await eventData.json()
+            event = event.data;
+            setEventData(event);
+            setLoader(false);
+        } catch(e) {
+            if(e){
+                console.log(e.message, 'Try updating the API');
                 setLoader(false);
                 setError(error);
-            })
+            }
+        }
     }
 
     useEffect(() => {
@@ -72,29 +74,29 @@ const Events = () => {
                 </div>
                 <div className="display-date">{grigorianDate} | {hijiriDate}</div>
                 <div className="event-accordion">
-                    <div>
-                    {error && <p>Error</p>}
-                    {!error &&
-                        <>
-                            {eventData.filter(event => parseInt(event.Day) === hijiriDay).length > 0 &&
-                                <>
-                                    {eventData.filter(event => parseInt(event.Day) === hijiriDay).map((event, index) => {
-                                        return(
-                                            <Accordion key={event.Day + index} id={'day_' + event.Day + index} title={event.Details} content={<AccordionContent data={event} />} />
-                                        )
-                                    })}
-                                </>
-                            }
+                    <>
+                        {error && <p>Error</p>}
+                        {!error &&
+                            <>
+                                {eventData.filter(event => parseInt(event.day) === hijiriDay).length > 0 &&
+                                    <>
+                                        {eventData.filter(event => parseInt(event.day) === hijiriDay).map((event, index) => {
+                                            return(
+                                                <Accordion key={event.id} id={event.id} title={event.title} content={<AccordionContent data={event} />} />
+                                            )
+                                        })}
+                                    </>
+                                }
 
-                            {eventData.filter(event => parseInt(event.Day) === hijiriDay).length === 0 &&
-                                <>
-                                    <h1>No Events listed on {hijiriDate}</h1>
-                                    <p>If you get to know any events on today please <Link to="/Events">add the event(s)</Link>. Out team will verify and listed in future.</p>
-                                </>
-                            }
-                        </>
-                    }
-                    </div>
+                                {eventData.filter(event => parseInt(event.day) === hijiriDay).length === 0 &&
+                                    <div className="curve-container">
+                                        <h1>No Events listed on {hijiriDate}</h1>
+                                        <p>If you get to know any events on today please <Link to="/Events">add the event(s)</Link>. Out team will verify and listed in future.</p>
+                                    </div>
+                                }
+                            </>
+                        }
+                    </>
                 </div>
             </div>
         </>
@@ -105,17 +107,29 @@ const AccordionContent = ({ data }) => {
     return(
         <>
             <ul className="event-list">
+                {data.birthDate !== '' &&(
+                    <li>
+                        <strong>Birth Day</strong>
+                        <span>{data.birthDate}</span>
+                    </li>
+                )}
                 <li>
                     <strong>Birth Place</strong>
                     <span>{data.birthPlace}</span>
                 </li>
+                {data.wisaalDate !== '' &&(
+                    <li>
+                        <strong>Wisaal Day</strong>
+                        <span>{data.wisaalDate}</span>
+                    </li>
+                )}
                 <li>
                     <strong>Ziyarath Place</strong>
                     <span>{data.ziyarathPlace}</span>
                 </li>
                 <li>
                     <h5>Description</h5>
-                    <p>{data.Remarks}</p>
+                    <p>{data.additionalInfo}</p>
                 </li>
             </ul>
         </>
