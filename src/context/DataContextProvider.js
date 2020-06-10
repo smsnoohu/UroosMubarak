@@ -1,24 +1,25 @@
-import React, { useContext, useState, useEffect, createContext } from 'react';
-import { EventContext } from './EventContextProvider';
+import React, { useState, useEffect, createContext } from 'react';
+import PreLoad from '../main/PreLoad';
 
 export const DataContext = createContext();
 
 const DataContextProvider = props => {
-    const { setLoader } = useContext(EventContext);
+    const [preLoad, setPreLoad] = useState(true);
     const [duas, setDuas] = useState([]);
     const [error, setError] = useState(null);
 
     const fetchDua = async () => {
-        setLoader(true);
+        setError(false);
         try{
             const duaData = await fetch('https://quthbiyamanzil.org/new/mproForDua.php?table1=Dua')
             const dua = await duaData.json()
-            setDuas(dua.data);
-            setLoader(false);
+            setDuas(dua);
+            setPreLoad(false);
         } catch(e) {
             if(e){
                 console.log(e.message, 'Try updating the API');
-                setLoader(false);
+                setPreLoad(false);
+                setError(true);
             }
         }
     }
@@ -30,13 +31,17 @@ const DataContextProvider = props => {
 
 
     return(
-        <DataContext.Provider
-            value={{
-                duas
-            }}
-        >
-            {props.children}
-        </DataContext.Provider>
+        <>
+            { preLoad && <PreLoad /> }
+            <DataContext.Provider
+                value={{
+                    duas,
+                    error
+                }}
+            >
+                {props.children}
+            </DataContext.Provider>
+        </>
     )
 }
 
