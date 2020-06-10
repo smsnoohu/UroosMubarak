@@ -1,11 +1,17 @@
 @import '../../assets/stylesheets/mixins/mixins';
 .dash-container{
+    .display-date{
+        font-family: 'poppinssemibold';
+        font-size:16px;
+        text-align:center;
+        padding:10px 0;
+    }
     .today-event{
         background:#032b4e url('../../assets/images/today-event-bg.jpg') no-repeat;
         background-size:cover;
         border-radius:10px;
         border:solid 1px #d2d2d2;
-        @include box-shadow(5px, 0, 5px, rgba(0, 0, 0, .1));
+        @include box-shadow(0, 22px, 22px, -13px, rgba(0, 0, 0, .5));
         padding:15px;
         color:#fff;
         a{
@@ -17,14 +23,17 @@
             }
         }
     }
-    .dua-container{
+    .dua-block{
         border-radius:10px;
         border:solid 1px #d2d2d2;
-        @include box-shadow(5px, 0, 5px, rgba(0, 0, 0, .1));
+        @include box-shadow(0, 22px, 22px, -13px, rgba(0, 0, 0, .3));
         padding:15px;
-        font-size:25px;
-        line-height:2;
-        direction: rtl;
-        text-align: right;
+        font-family: 'poppinssemibold';
+        .arab-text{
+            font-size:25px;
+            line-height:2;
+            direction: rtl;
+            text-align: right;
+        }
     }
 }

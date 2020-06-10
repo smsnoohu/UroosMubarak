@@ -43,26 +43,26 @@ const Events = () => {
         updateDate(nextDay);
     }
 
-    const fetchEvent = async () => {
-        setLoader(true);
-        try{
-            const eventData = await fetch('https://quthbiyamanzil.org/new/mproForApp.php?customvar='+ hijiriMonth + '&table1=UroosMubarak')
-            let event = await eventData.json()
-            event = event.data;
-            setEventData(event);
-            setLoader(false);
-        } catch(e) {
-            if(e){
-                console.log(e.message, 'Try updating the API');
+    useEffect(() => {
+
+        const fetchEvent = async () => {
+            setLoader(true);
+            try{
+                const eventData = await fetch('https://quthbiyamanzil.org/new/mproForApp.php?customvar='+ hijiriMonth + '&table1=UroosMubarak')
+                let event = await eventData.json()
+                event = event.data;
+                setEventData(event);
                 setLoader(false);
-                setError(error);
+            } catch(e) {
+                if(e){
+                    console.log(e.message, 'Try updating the API');
+                    setLoader(false);
+                    setError(error);
+                }
             }
         }
-    }
-
-    useEffect(() => {
         fetchEvent();
-    }, [hijiriMonth]);
+    }, [hijiriMonth, error, setLoader]);
     
     return(
         <>
@@ -107,6 +107,11 @@ const AccordionContent = ({ data }) => {
     return(
         <>
             <ul className="event-list">
+                {data.birthDate === '' && data.birthPlace === '' && data.wisaalDate === '' && data.ziyarathPlace === '' && data.additionalInfo === '' && (
+                    <li className="empty-event-info">
+                        <strong>{data.title}</strong>
+                    </li>
+                )}
                 {data.birthDate !== '' &&(
                     <li>
                         <strong>Birth Day</strong>

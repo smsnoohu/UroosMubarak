@@ -34,10 +34,10 @@
 
 //== Box Shadow
 
-@mixin box-shadow($left, $top, $radius, $color) {
-	box-shadow: $left $top $radius $color;
-	-webkit-box-shadow: $left $top $radius $color;
-	-moz-box-shadow: $left $top $radius $color;
+@mixin box-shadow($left, $top, $blur-radius, $spread-radius, $color) {
+	box-shadow: $left $top $blur-radius $spread-radius $color;
+	-webkit-box-shadow: $left $top $blur-radius $spread-radius $color;
+	-moz-box-shadow: $left $top $blur-radius $spread-radius $color;
 }
 
 //== sr-only

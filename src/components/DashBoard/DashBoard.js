@@ -4,9 +4,11 @@ import { DUA } from './DashboardData';
 import './dashboard.scss';
 import { DateFormetter, formatHijiriDate, getHijiriDay, getHijiriMonth } from '../../utils/DateFormetter';
 import { EventContext } from '../../context/EventContextProvider';
+import { DataContext } from '../../context/DataContextProvider';
 
 const DashBoard = () => {
     const { setLoader } = useContext(EventContext);
+    const { duas } = useContext(DataContext);
     const today = new Date();
     const [grigorianDate] = useState(DateFormetter(today));
     const [hijiriDate] = useState(formatHijiriDate(today));
@@ -19,26 +21,37 @@ const DashBoard = () => {
     const [hijiriDay] = useState(getHijiriDay(today));
     const [hijiriMonth] = useState(getHijiriMonth(today));
 
-    const fetchEvent = async () => {
-        setLoader(true);
-        try{
-            const eventData = await fetch('https://quthbiyamanzil.org/new/mproForApp.php?customvar='+ hijiriMonth + '&table1=UroosMubarak')
-            let event = await eventData.json()
-            event = event.data.filter((event, index) => parseInt(event.day) === hijiriDay).filter((event, index) => index < 3);
-            setEventData(event);
-            setLoader(false);
-        } catch(e) {
-            if(e){
-                console.log(e.message, 'Try updating the API');
-                setLoader(false);
-                setError(error);
-            }
-        }
-    }
+    console.log('duas: ', duas);
+
+    // const randomDuaObj = duas[Math.floor(Math.random() * duas.length)] || {};
+
+    // console.log('randomDuaObj: ', randomDuaObj.category);
+
+    // const randomDua = randomDuaObj.dua[Math.floor(Math.random() * duas.length)] || {} || [];
+
+    // console.log('randomDua: ', randomDua);
+
+    
 
     useEffect(() => {
+        const fetchEvent = async () => {
+            setLoader(true);
+            try{
+                const eventData = await fetch('https://quthbiyamanzil.org/new/mproForApp.php?customvar='+ hijiriMonth + '&table1=UroosMubarak')
+                let event = await eventData.json()
+                event = event.data.filter((event, index) => parseInt(event.day) === hijiriDay).filter((event, index) => index < 3);
+                setEventData(event);
+                setLoader(false);
+            } catch(e) {
+                if(e){
+                    console.log(e.message, 'Try updating the API');
+                    setLoader(false);
+                    setError(error);
+                }
+            }
+        }
         fetchEvent();
-    }, [hijiriDay, hijiriMonth]);
+    }, [hijiriDay, hijiriMonth, error, setLoader]);
 
     return(
         <>
@@ -78,19 +91,20 @@ const DashBoard = () => {
                         </>
                     }
                 </div>
-                <h2 className="pt-20 pb-10">Dua of the day</h2>
-                <div className="dua-container">
+                {duas.length && (
                     <>
-                        {dua.map((d, index) => {
-                            return(
-                                <Fragment key={d.id}>
-                                    <p>{d.desc}</p>
+                        {duas[0].dua.filter((dua, index) => index === hijiriDay).map((d, index) => (
+                            <Fragment key={d.id}>
+                                <h2 className="pt-30 pb-10">{d.engTitle} {d.engTitle && d.tamilTitle && (<>-</>)} {d.tamilTitle}</h2>
+                                <div className="dua-block">
+                                    <p className="arab-text">{d.arabicText}</p>
+                                    {d.translation && (<p>{d.translation}</p>)}
                                     {index !== dua.length-1 && <hr /> }
-                                </Fragment>
-                            )
-                        })}
+                                </div>
+                            </Fragment>
+                        ))}
                     </>
-                </div>
+                )}
             </div>
         </>
     );

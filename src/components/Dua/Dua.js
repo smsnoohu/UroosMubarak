@@ -1,38 +1,43 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { EventContext } from '../../context/EventContextProvider';
 import { DataContext } from '../../context/DataContextProvider';
-import { DUA_DATA } from './DuaConst';
+import './dua.scss';
 
 const Dua = () => {
     const { duas } = useContext(DataContext);
 
-    console.log('dataContext: ', duas);
-
     return(
-        <>
-            <h1>Dua Content</h1>
-            {/* <ul className="dua-list">
+        <div className="dua-container" id="dua-dashboard">
+            <ul className="dua-list">
                 {duas.map((dua, index) => (
-                    <li key={dua.id}>
-                        <h2>{dua.category}</h2>
+                    <li key={dua.categoryID}>
+                        <h2>{(dua.category === 'Daily' && 'Daily') || (dua.category === 'onDate' && 'Special Days') || (dua.category === 'General' && 'General') || (dua.category === 'Special' && 'Special')} Duas</h2>
                         <ul className="dua-sub-list">
-                            <li>
+                            {dua.dua.filter((d, idx) => idx < 3).map(s => (
+                                <li key={`${dua.categoryID}_${s.id}`}>
+                                    <Link
+                                        to={{
+                                            pathname: '/DuaDetail',
+                                            state: { full: dua, single: s}
+                                        }}
+                                    >
+                                        {s.engTitle} - {s.tamilTitle}
+                                    </Link>
+                                </li>
+                            ))}
+                            <li className="more">
                                 <Link
                                     to={{
-                                        pathname: '/DuaDetail',
-                                        state: { data: dua}
+                                        pathname: '/DuaList',
+                                        state: { full: dua, single: null}
                                     }}
-                                >
-                                    {dua.engTitle} - {dua.tamilTitle}
-                                </Link>
+                                >more {(dua.category === 'Daily' && 'Daily') || (dua.category === 'onDate' && 'Special Days') || (dua.category === 'General' && 'General') || (dua.category === 'Special' && 'Special')} Duas</Link>
                             </li>
                         </ul>
                     </li>
                 ))}
-                    
-            </ul> */}
-        </>
+            </ul>
+        </div>
     );
 }
 
