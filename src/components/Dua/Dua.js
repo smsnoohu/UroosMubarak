@@ -13,12 +13,12 @@ const Dua = () => {
                     <li key={dua.categoryID}>
                         <h2>{(dua.category === 'Daily' && 'Daily') || (dua.category === 'onDate' && 'Special Days') || (dua.category === 'General' && 'General') || (dua.category === 'Special' && 'Special')} Duas</h2>
                         <ul className="dua-sub-list">
-                            {dua.dua.filter((d, idx) => idx < 3).map(s => (
+                            {dua.dua.filter((d, idx) => idx < 3).map((s, i) => (
                                 <li key={`${dua.categoryID}_${s.id}`}>
                                     <Link
                                         to={{
                                             pathname: '/DuaDetail',
-                                            state: { full: dua, single: s}
+                                            state: { full: dua, duaIdx: i}
                                         }}
                                     >
                                         {s.engTitle} - {s.tamilTitle}
@@ -29,7 +29,7 @@ const Dua = () => {
                                 <Link
                                     to={{
                                         pathname: '/DuaList',
-                                        state: { full: dua, single: null}
+                                        state: { full: dua }
                                     }}
                                 >more {(dua.category === 'Daily' && 'Daily') || (dua.category === 'onDate' && 'Special Days') || (dua.category === 'General' && 'General') || (dua.category === 'Special' && 'Special')} Duas</Link>
                             </li>

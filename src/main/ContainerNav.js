@@ -6,6 +6,8 @@ import Dua from '../components/Dua/Dua';
 import DuaList from '../components/Dua/DuaList';
 import DuaDetail from '../components/Dua/DuaDetail';
 import More from '../components/More/More';
+import AddEvent from '../components/AddEvent/AddEvent';
+import ContactUs from '../components/ContactUs/ContactUs';
 
 const ContainerNav = () => {
     return(
@@ -16,6 +18,8 @@ const ContainerNav = () => {
             <Route exact path="/DuaList" component={DuaList} />
             <Route exact path="/DuaDetail" component={DuaDetail} />
             <Route exact path="/More" component={More} />
+            <Route exact path="/AddEvent" component={AddEvent} />
+            <Route exact path="/ContactUs" component={ContactUs} />
         </Switch>
     )
 }

@@ -1,6 +1,6 @@
 @import '../../assets/stylesheets/mixins/mixins';
 .dua-container{
-    padding-top:40px;
+    padding-top:45px;
     &#dua-dashboard{
         padding-top:0;
     }
@@ -17,9 +17,10 @@
             text-decoration:none;
             display:inline-block;
             padding:5px 5px 5px 17px;
-            font-family: 'poppinslight';
+            font-family: 'poppinssemibold';
             font-size:.9rem;
             position:relative;
+            line-height:2;
             &:before{
                 font-family: 'FontAwesome';
                 position:absolute;
@@ -106,6 +107,12 @@
             &:last-child{
                 padding:0;
             }
+        }
+    }
+    .dua-nav{
+        padding-top:30px;
+        button:last-child{
+            float:right;
         }
     }
 }

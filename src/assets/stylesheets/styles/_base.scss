@@ -48,6 +48,9 @@ body{
 .clearfix{
     @include clearFix();
 }
+.display-block{
+    display:block !important;
+}
 hr{
     border: 0;
     height: 1px;
@@ -123,11 +126,12 @@ h1, h2, h3, h4, h5, h6{
 }
 .under-construction{
     text-align:center;
-    position:fixed;
-    top:50%;
-    left:50%;
-    margin:-50px;
+    padding:30px;
     .fa{
+        position:fixed;
+        top:50%;
+        left:50%;
+        margin:-50px;
         font-size:100px;
     }
 }

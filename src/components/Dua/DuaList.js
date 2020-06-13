@@ -18,7 +18,7 @@ const DuaList = props => {
                             <Link
                                 to={{
                                     pathname: '/DuaDetail',
-                                    state: { full: duas, single: s}
+                                    state: { full: duas, duaIdx: index}
                                 }}
                             >
                                 {s.engTitle} - {s.tamilTitle}
