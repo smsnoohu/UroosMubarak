@@ -16,6 +16,7 @@
             text-decoration:none;
             text-transform:uppercase;
             padding:60px 5px 10px;
+            text-shadow:2px 3px 5px rgba(0, 0, 0, 0.3);
             &:before{
                 font-family: 'FontAwesome';
                 font-size:40px;
@@ -24,6 +25,7 @@
                 top:0;
                 left:50%;
                 margin-left:-17.5px;
+                text-shadow:2px 3px 5px rgba(117, 117, 117, 0.3);
             }
             &.addEvent:before{
                 content:'\f271';
