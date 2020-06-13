@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './more.scss';
 
 const More = () => {
     return(
         <>
-            <h1>Under Development</h1>
-            <p>This page is under development. Please visit later</p>
-            <div className="under-construction"><em className="fa fa-tools"></em></div>
+            <ul className="more-list">
+                <li><Link to="/AddEvent" className="addEvent">Add Event</Link></li>
+                <li><Link to="/ContactUs" className="contactUs">Contact Us</Link></li>
+            </ul>
         </>
     )
 }

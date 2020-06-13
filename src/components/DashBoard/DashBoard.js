@@ -1,6 +1,5 @@
 import React, { useState, Fragment, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { DUA } from './DashboardData';
 import './dashboard.scss';
 import { DateFormetter, formatHijiriDate, getHijiriDay, getHijiriMonth } from '../../utils/DateFormetter';
 import { EventContext } from '../../context/EventContextProvider';
@@ -13,23 +12,11 @@ const DashBoard = () => {
     const [grigorianDate] = useState(DateFormetter(today));
     const [hijiriDate] = useState(formatHijiriDate(today));
 
-    const [dua] = useState(DUA);
-
     const [error, setError] = useState(null);
     const [eventData, setEventData] = useState([]);
 
     const [hijiriDay] = useState(getHijiriDay(today));
     const [hijiriMonth] = useState(getHijiriMonth(today));
-
-    console.log('duas: ', duas);
-
-    // const randomDuaObj = duas[Math.floor(Math.random() * duas.length)] || {};
-
-    // console.log('randomDuaObj: ', randomDuaObj.category);
-
-    // const randomDua = randomDuaObj.dua[Math.floor(Math.random() * duas.length)] || {} || [];
-
-    // console.log('randomDua: ', randomDua);
 
     
 
@@ -99,7 +86,6 @@ const DashBoard = () => {
                                 <div className="dua-block">
                                     <p className="arab-text">{d.arabicText}</p>
                                     {d.translation && (<p>{d.translation}</p>)}
-                                    {index !== dua.length-1 && <hr /> }
                                 </div>
                             </Fragment>
                         ))}

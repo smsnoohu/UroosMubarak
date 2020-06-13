@@ -1,0 +1,36 @@
+@import '../../assets/stylesheets/mixins/general';
+.more-list{
+    list-style:none;
+    @include flex();
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    li{
+        width:33.33333333%;
+        max-width:33.33333333%;
+        padding:10px 20px;
+        text-align:center;
+        a{
+            position:relative;
+            display:block;
+            color:#333;
+            text-decoration:none;
+            text-transform:uppercase;
+            padding:60px 5px 10px;
+            &:before{
+                font-family: 'FontAwesome';
+                font-size:40px;
+                position:absolute;
+                content:'';
+                top:0;
+                left:50%;
+                margin-left:-17.5px;
+            }
+            &.addEvent:before{
+                content:'\f271';
+            }
+            &.contactUs:before{
+                content:'\f2c2';
+            }
+        }
+    }
+}
